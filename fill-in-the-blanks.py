@@ -98,7 +98,7 @@ def play_game():
                 if user_guess == correct_answer:
                     user_answers.append(user_guess)
                     print "Congratulations. The correct answer was indeed:__", correct_answer,"__!\n"
-                    break # there is more than one instance of __1__ thats why it comes back 2 times although break! Need to create a list for the correct answers                
+                    break                 
                 else:
                     if nbr_games == 1:
                         print "You didn't guessed correctly. The correct_answer was:___", correct_answer,"__ Start another game!\n"
