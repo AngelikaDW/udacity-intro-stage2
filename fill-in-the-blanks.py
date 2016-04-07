@@ -68,6 +68,39 @@ def word_in_placeholders(word,placeholders):
             return i
     return None
 
+
+def validate_answers(quiz, placeholders, answers, nbr_games):
+    replaced_quiz=[]
+    user_answers =[]
+    for word in quiz:
+        replacement = word_in_placeholders(word, placeholders)
+        if replacement != None:
+            #print replacement
+        # link placeholder to correct answer
+            correct_answer = answers[int(replacement)-1]
+            #print correct_answer - ##uncomment for cheating
+        #Loop through the placeholders, ask for user input and check if correct. Display message.    
+            while nbr_games >0:
+                user_guess =  raw_input("Type in your guess for __" + replacement +"__!     \n")
+                if user_guess == correct_answer:
+                    user_answers.append(user_guess)
+                    print "Congratulations. The correct answer was indeed:__", correct_answer,"__!\n"
+                    word = word.replace(replacement, user_guess)
+                    replaced_quiz.append(word)
+                    #print replaced_quiz
+                    break                 
+                else:
+                    if nbr_games == 1:
+                        replaced_quiz.append(word)
+                        print "You didn't guessed correctly. The correct_answer was:___", correct_answer,"__ Start another game!\n"
+                    else:             
+                        print '\nTry again. You still got:', nbr_games-1, 'times left!\n'
+                nbr_games = nbr_games - 1
+            replaced_quiz= " ".join(replaced_quiz)
+            return replaced_quiz
+
+
+
 def play_game():
     user_answers=[]
     
@@ -83,8 +116,9 @@ def play_game():
     placeholders = prep_palceholders(difficulty_level)
 
     print quiz
-    #print answers
-
+    print answers
+    print validate_answers(quiz, placeholders, answers, nbr_games)
+"""
     for word in quiz:
         replacement = word_in_placeholders(word, placeholders)
         if replacement != None:
@@ -105,5 +139,5 @@ def play_game():
                     else:             
                         print '\nTry again. You still got:', nbr_games-1, 'times left!\n'
                 nbr_games = nbr_games - 1
-
+"""
 play_game()
